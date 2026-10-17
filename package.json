@@ -1,0 +1,46 @@
+{
+  "name": "geogridapi-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for GeoGridAPI: Google Maps geo-grid rank tracking for local SEO (rank heatmaps, competitors, trends, schedules) in Claude, Cursor and any MCP client.",
+  "type": "module",
+  "bin": {
+    "geogridapi-mcp": "src/index.js"
+  },
+  "main": "src/bridge.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test",
+    "smoke": "node scripts/smoke.js",
+    "sync-catalog": "node scripts/sync-catalog.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "local-seo",
+    "geogrid",
+    "google-maps",
+    "rank-tracker",
+    "google-business-profile",
+    "heatmap"
+  ],
+  "homepage": "https://geogridapi.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geogridapi/geogridapi-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/geogridapi/geogridapi-mcp/issues"
+  },
+  "license": "MIT",
+  "author": "Localnord, LLC (GeoGridAPI)",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.0"
+  }
+}
