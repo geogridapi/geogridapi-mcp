@@ -16,6 +16,9 @@ export const CALL_TIMEOUT_MS = 150_000;
 export const LIST_TIMEOUT_MS = 20_000;
 const MAX_ERROR_LENGTH = 300;
 
+// The prefix of every GeoGridAPI key: anything else cannot authenticate, so it is not worth a network round trip.
+export const KEY_PATTERN = /^gga_(live|test)_/;
+
 export const MISSING_KEY_MESSAGE =
   "GEOGRIDAPI_API_KEY is not set. Create a key in the console at https://geogridapi.io " +
   "(gga_test_ keys are free and return sample grids) and add it to this server's environment.";
@@ -69,6 +72,8 @@ function log(message) {
  */
 export function createBridgeServer({ apiKey, connectRemote, version }) {
   let remotePromise = null;
+  // Directory sandboxes start the server with a placeholder key: list from the catalog without calling the hosted server.
+  const listsRemotely = Boolean(apiKey) && KEY_PATTERN.test(apiKey);
 
   function getRemote() {
     remotePromise ??= connectRemote().catch((error) => {
@@ -89,7 +94,7 @@ export function createBridgeServer({ apiKey, connectRemote, version }) {
   );
 
   server.setRequestHandler(ListToolsRequestSchema, async (request) => {
-    if (!apiKey) return { tools: catalog.tools };
+    if (!listsRemotely) return { tools: catalog.tools };
     try {
       const remote = await getRemote();
       return await remote.listTools(request.params, { timeout: LIST_TIMEOUT_MS });
@@ -114,7 +119,7 @@ export function createBridgeServer({ apiKey, connectRemote, version }) {
   });
 
   server.setRequestHandler(ListPromptsRequestSchema, async (request) => {
-    if (!apiKey) return { prompts: catalog.prompts };
+    if (!listsRemotely) return { prompts: catalog.prompts };
     try {
       const remote = await getRemote();
       return await remote.listPrompts(request.params, { timeout: LIST_TIMEOUT_MS });

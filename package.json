@@ -1,5 +1,6 @@
 {
   "name": "geogridapi-mcp",
+  "mcpName": "io.geogridapi/geogridapi",
   "version": "1.0.0",
   "description": "MCP server for GeoGridAPI: Google Maps geo-grid rank tracking for local SEO (rank heatmaps, competitors, trends, schedules) in Claude, Cursor and any MCP client.",
   "type": "module",

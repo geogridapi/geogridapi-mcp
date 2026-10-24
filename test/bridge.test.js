@@ -64,6 +64,19 @@ test("without a key, introspection answers from the bundled catalog", async () =
   assert.match(client.getInstructions(), /find_business/);
 });
 
+test("with a placeholder key, introspection answers from the catalog without connecting", async () => {
+  const client = await connect({
+    apiKey: "placeholder",
+    connectRemote: () => assert.fail("must not connect with a malformed key"),
+  });
+
+  const { tools } = await client.listTools();
+  const { prompts } = await client.listPrompts();
+
+  assert.equal(tools.length, catalogTools().length);
+  assert.equal(prompts.length, catalogPrompts().length);
+});
+
 test("without a key, a tool call explains how to get one", async () => {
   const client = await connect({ apiKey: undefined, connectRemote: () => assert.fail() });
 

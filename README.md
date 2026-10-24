@@ -24,7 +24,7 @@ It runs locally over stdio and relays every call to the hosted server at `https:
   "mcpServers": {
     "geogridapi": {
       "command": "npx",
-      "args": ["-y", "github:geogridapi/geogridapi-mcp"],
+      "args": ["-y", "geogridapi-mcp"],
       "env": { "GEOGRIDAPI_API_KEY": "gga_live_…" }
     }
   }
@@ -34,7 +34,7 @@ It runs locally over stdio and relays every call to the hosted server at `https:
 **Claude Code**:
 
 ```bash
-claude mcp add geogridapi --env GEOGRIDAPI_API_KEY=gga_live_… -- npx -y github:geogridapi/geogridapi-mcp
+claude mcp add geogridapi --env GEOGRIDAPI_API_KEY=gga_live_… -- npx -y geogridapi-mcp
 ```
 
 **VS Code** (`.vscode/mcp.json`):
@@ -45,7 +45,7 @@ claude mcp add geogridapi --env GEOGRIDAPI_API_KEY=gga_live_… -- npx -y github
     "geogridapi": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "github:geogridapi/geogridapi-mcp"],
+      "args": ["-y", "geogridapi-mcp"],
       "env": { "GEOGRIDAPI_API_KEY": "gga_live_…" }
     }
   }

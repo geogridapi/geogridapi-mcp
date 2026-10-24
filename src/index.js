@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 import { createRequire } from "node:module";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { createBridgeServer, MISSING_KEY_MESSAGE } from "./bridge.js";
+import { createBridgeServer, KEY_PATTERN, MISSING_KEY_MESSAGE } from "./bridge.js";
 import { connectRemote, resolveRemoteUrl } from "./remote.js";
 
 const { version } = createRequire(import.meta.url)("../package.json");
-const KEY_PATTERN = /^gga_(live|test)_/;
 
 const apiKey = process.env.GEOGRIDAPI_API_KEY?.trim() || undefined;
 let url;
